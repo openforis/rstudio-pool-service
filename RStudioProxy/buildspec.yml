@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - cd RStudioProxy
+      # Install all dependencies (including dependencies for running tests)
+      - npm install
+      - pip install --upgrade awsebcli awscli
+  pre_build:
+    commands:
+      - echo pre build, init the environment
+      - eb init --platform "Node.js 12" --region eu-central-1 --keyname "LambdaInstance" RStudioProxy_b
+  build:
+    commands:
+      - echo Entered the build phase ...
+  post_build:
+    commands:
+      - eb deploy rstudioproxy-default-env
+artifacts:
+  files:
+    - '**/*'
