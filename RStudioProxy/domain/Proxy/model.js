@@ -11,7 +11,7 @@ const customRouter = (req) => {
 }
 
 const rewriteFn = (path, req) => {
-  const { instanceId, userId} = req
+  const { instanceId, userId } = req
   const newPAth = (path || '').replace(`${instanceId}_${userId}`, '')
   return newPAth
 }

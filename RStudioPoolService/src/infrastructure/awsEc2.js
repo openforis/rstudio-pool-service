@@ -1,3 +1,4 @@
+/* eslint-disable new-cap */
 const EC2 = require('aws-sdk/clients/ec2')
 
 const createInstance = async (newInstanceConfig) => {

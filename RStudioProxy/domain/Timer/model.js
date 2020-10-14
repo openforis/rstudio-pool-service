@@ -4,7 +4,7 @@ const Instance = require('../Instance')
 const timeoutsMap = {}
 let timersInitialized = false
 
-const setTimer = async ({ instanceId, userId }) =>
+const setTimer = async ({ instanceId }) =>
   new Promise((resolve) => {
     clearTimeout(timeoutsMap[instanceId])
 
@@ -16,7 +16,6 @@ const setTimer = async ({ instanceId, userId }) =>
 
 const initTimers = async () => {
   const instancesIds = await Instance.Model.getInstancesIds()
-  console.log("AASDDA", instancesIds)
   await Promise.all(
     (instancesIds || []).filter(Instance.Model.isAssigned).map(async (instanceId) => {
       return setTimer({ instanceId })

@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: RStudioPoolService
 Transform:
-- AWS::Serverless-2016-10-31
+  - AWS::Serverless-2016-10-31
 Globals:
   Function:
     Timeout: 3
@@ -15,5 +15,5 @@ Resources:
       Timeout: 100
       Description: A Lambda function that returns a static string.
       Policies:
-      - AWSLambdaBasicExecutionRole
+        - AWSLambdaBasicExecutionRole
       CodeUri: s3://aws-sam-cli-managed-default-samclisourcebucket-81qiwpvg6puh/aece144c8ca1702a2dcd92931a288dcb

@@ -12,10 +12,10 @@ const generateResponse = (instance) => {
   return response
 }
 
-const requestInstance = async (event, {payload = {}} = {}) => {
+const requestInstance = async (event, { payload = {} } = {}) => {
   const { userId = false } = payload
-  
-  if (!userId && !Authorizer(event, [ARENA_POOL_SERVICE_KEY] )) {
+
+  if (!userId && !Authorizer(event, [ARENA_POOL_SERVICE_KEY])) {
     const response = {
       statusCode: 403,
       body: JSON.stringify({}),

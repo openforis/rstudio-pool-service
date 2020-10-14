@@ -1,31 +1,28 @@
-const { requestInstance, removeInstance, checkStatus } = require("../useCases");
+const { requestInstance, removeInstance, checkStatus } = require('../useCases')
 
 const commandHandlers = {
   REQUEST_RSTUDIO: requestInstance,
   GET_STATUS: checkStatus,
   DELETE: removeInstance,
-};
+}
 
 const getCommandHandler = (body) => {
-  const { command } = body;
-  return command ? commandHandlers[command] : false;
-};
+  const { command } = body
+  return command ? commandHandlers[command] : false
+}
 
 exports.handler = async (event = {}) => {
-  const { body = "", headers = {} } = event;
-  const bodyParsed = JSON.parse(body);
-  const { payload = {} } = bodyParsed;
-  const commandHandler = getCommandHandler(bodyParsed);
+  const { body = '' } = event
+  const bodyParsed = JSON.parse(body)
+  const { payload = {} } = bodyParsed
+  const commandHandler = getCommandHandler(bodyParsed)
 
   let response = {
     statusCode: 400,
     body: JSON.stringify({ status: event }),
-  };
-  if (commandHandler) {
-    response = commandHandler(event, { payload });
   }
-  return response;
-};
-
-/*(req, res, next) => {
-  const authHeader = req.headers.authorization*/
+  if (commandHandler) {
+    response = commandHandler(event, { payload })
+  }
+  return response
+}

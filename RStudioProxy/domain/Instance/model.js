@@ -1,7 +1,9 @@
 const { commands } = require('../../infrastructure')
 
 const getInstance = async ({ instanceId, userId }) => {
-  const { data } = await commands.sendCommand({ command: commands.instanceCommands.getInstanceStatus({ instanceId, userId }) })
+  const { data } = await commands.sendCommand({
+    command: commands.instanceCommands.getInstanceStatus({ instanceId, userId }),
+  })
   const { instance } = data
   return instance
 }

@@ -8,5 +8,5 @@ module.exports = {
   STRING_TO_REPLACE: process.env.STRING_TO_REPLACE,
   TIMEOUT_INSTANCE: process.env.TIMEOUT_INSTANCE,
   MAX_INSTANCES: process.env.MAX_INSTANCES,
-  PROXY_KEY: process.env.PROXY_KEY
+  PROXY_KEY: process.env.PROXY_KEY,
 }

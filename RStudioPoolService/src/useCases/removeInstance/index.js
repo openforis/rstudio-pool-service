@@ -1,9 +1,9 @@
 const { PROXY_KEY } = require('../../../config')
-const { Instance, Authorizer} = require('../../domain')
+const { Instance, Authorizer } = require('../../domain')
 
 const { Manager: InstanceManager } = Instance
 
-const removeInstance = async (event, { payload = {}} = {}) => {
+const removeInstance = async (event, { payload = {} } = {}) => {
   const { instanceId } = payload
 
   if (!Authorizer(event, [PROXY_KEY])) {

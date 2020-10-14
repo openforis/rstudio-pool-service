@@ -1,13 +1,14 @@
 const axios = require('axios')
 
-const { SERVICE_URL, PROXY_KEY} = require('../config')
+const { SERVICE_URL, PROXY_KEY } = require('../config')
 
-const sendCommand = async ({ command }) => axios.post(SERVICE_URL, command, {
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization: PROXY_KEY,
-  },
-})
+const sendCommand = async ({ command }) =>
+  axios.post(SERVICE_URL, command, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: PROXY_KEY,
+    },
+  })
 
 const instanceCommands = {
   delete: ({ instanceId }) => ({ command: 'DELETE', payload: { instanceId } }),
