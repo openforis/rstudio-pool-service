@@ -1,0 +1,33 @@
+{
+  "name": "rstudio-pool-service",
+  "version": "1.0.0",
+  "description": "## Purpose",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openforis/rstudio-pool-service.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/openforis/rstudio-pool-service/issues"
+  },
+  "homepage": "https://github.com/openforis/rstudio-pool-service#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "devDependencies": {
+    "prettier": "^2.1.2"
+  },
+  "dependencies": {
+    "eslint": "^7.11.0"
+  }
+}
