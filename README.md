@@ -163,6 +163,8 @@ ACCOUNT = 'XXXXXXX.dkr.ecr.eu-central-1.amazonaws.com'
 SECURITY_GROUP = 'sg-1234aa12a123ab123'
 INSTANCE_PROFILE = 'ec2-admin'
 KEY_NAME = 'LambdaInstance'
+ARENA_POOL_SERVICE_KEY = 'client-secret-key-arena'
+PROXY_KEY = 'proxy-scret-key'
 ```
 
 the env vars are propagated to the .env file with `printenv > .env` command into the buildspec.yml
@@ -233,6 +235,7 @@ Procfile
     STRING_TO_REPLACE: process.env.STRING_TO_REPLACE,
     ROUTE_TO_REPLACE: process.env.ROUTE_TO_REPLACE,
     TIMEOUT_INSTANCE: process.env.TIMEOUT_INSTANCE,
+    PROXY_KEY: process.env.PROXY_KEY
   }
   ```
 
@@ -258,6 +261,7 @@ SERVICE_URL = 'url_to_the_pool_service'
 ROUTE_TO_REPLACE = 'http://REPLACE_ME:8787/'
 STRING_TO_REPLACE = 'REPLACE_ME'
 TIMEOUT_INSTANCE = 60000
+PROXY_KEY = 'proxy-scret-key'
 ```
 
 This is the config file:
@@ -270,6 +274,7 @@ module.exports = {
   ROUTE_TO_REPLACE: process.env.ROUTE_TO_REPLACE,
   STRING_TO_REPLACE: process.env.STRING_TO_REPLACE,
   TIMEOUT_INSTANCE: process.env.TIMEOUT_INSTANCE,
+  PROXY_KEY: process.env.PROXY_KEY
 }
 ```
 
