@@ -316,10 +316,12 @@ Tag this new image and push it to the registry.
 
 ## Security
 To create an instance the requester needs a key.
+
 To get information of some instance the userId and the instanceId are needed.
 
 ---
 ## How can the system be improved?
 
 [ ] Add Purpose as config on the proxy and parameter on the Service, based on this Purpose choose one image and ec2 instance config.
+
 [ ] Add some storage, bbdd, to save the assignation of the instances in order to have the history
