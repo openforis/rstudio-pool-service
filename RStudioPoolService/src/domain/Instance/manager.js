@@ -28,6 +28,7 @@ const getInstanceById = async ({ instanceId = false } = {}) => {
 
 const createNewInstance = async ({ userId = false } = {}) => {
   const newInstanceConfig = InstanceModel.getNewInstanceConfig({ userId })
+  console.log(newInstanceConfig)
   const createdInstance = await awsEc2.createInstance(newInstanceConfig)
 
   const instance = InstanceModel.parsedInstanceFrom({ instance: createdInstance })

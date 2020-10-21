@@ -7,9 +7,11 @@ const createInstance = async (newInstanceConfig) => {
     ...newInstanceConfig,
     ...(newInstanceConfig.UserData ? { UserData: new Buffer.from(newInstanceConfig.UserData).toString('base64') } : {}),
   }
-
+  console.log(newInstanceConfig)
   // function to create this new instance
   const instance = await ec2.runInstances(params).promise()
+  console.log("-----------------------------")
+  console.log(instance)
   const instanceCreated = instance.Instances[0]
   return instanceCreated
 }

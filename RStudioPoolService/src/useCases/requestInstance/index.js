@@ -31,7 +31,9 @@ const requestInstance = async (event, { payload = {} } = {}) => {
   let assignedInstance = false
   let remainFreeInstances = 0
   const freeInstances = await InstanceManager.getFreeInstances()
+  console.log(freeInstances)
   const currentInstances = await InstanceManager.getInstances()
+  console.log(currentInstances)
   let currentNumberOfInstances = (currentInstances || []).length
 
   if (freeInstances.length > 0) {
