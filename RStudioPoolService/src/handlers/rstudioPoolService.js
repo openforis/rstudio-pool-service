@@ -12,11 +12,8 @@ const getCommandHandler = (body) => {
 }
 
 exports.handler = async (event = {}) => {
-  console.log("event", event)
   const { body = '' } = event
-  console.log(body)
   const bodyParsed = JSON.parse(body)
-  console.log("bodyParsed", bodyParsed)
   const { payload = {} } = bodyParsed
   const commandHandler = getCommandHandler(bodyParsed)
 

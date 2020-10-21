@@ -2,7 +2,6 @@ const { awsEc2 } = require('../../infrastructure')
 const InstanceModel = require('./model')
 
 const getInstances = async () => {
-  console.log("getInstances")
   const instancesAws = await awsEc2.getInstances({ filters: InstanceModel.getFilters() })
   const instances = (instancesAws || []).map((instance) => InstanceModel.parsedInstanceFrom({ instance }))
   return instances
@@ -29,7 +28,6 @@ const getInstanceById = async ({ instanceId = false } = {}) => {
 
 const createNewInstance = async ({ userId = false } = {}) => {
   const newInstanceConfig = InstanceModel.getNewInstanceConfig({ userId })
-  console.log(newInstanceConfig)
   const createdInstance = await awsEc2.createInstance(newInstanceConfig)
 
   const instance = InstanceModel.parsedInstanceFrom({ instance: createdInstance })

@@ -38,9 +38,3 @@ Resources:
           Properties:
             Path: /
             Method: POST
-      VpcConfig:
-        SecurityGroupIds:
-          - sg-b1b579d3
-        SubnetIds:
-          - subnet-38e6fc75
-          - subnet-c2ea32a8
