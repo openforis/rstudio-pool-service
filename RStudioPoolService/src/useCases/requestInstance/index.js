@@ -22,6 +22,7 @@ const requestInstance = async (event, { payload = {} } = {}) => {
     }
     return response
   }
+  console.log("authorized")
 
   const userInstance = await InstanceManager.getInstanceByUserId({ userId })
   if (userInstance) {
