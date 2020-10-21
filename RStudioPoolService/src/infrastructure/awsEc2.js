@@ -28,7 +28,8 @@ const getInstances = async ({ filters }) => {
   }
   console.log("params")
   console.log(params)
-  const reservations = await ec2.describeInstances(params).promise()
+  const reservations = await ec2.describeInstances().promise()
+  console.log(reservations)
   const { Reservations } = reservations
   const instances = Reservations.reduce((acc, reservation) => [...acc, ...(reservation.Instances || [])], [])
   return instances
