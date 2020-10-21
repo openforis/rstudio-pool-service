@@ -12,7 +12,7 @@ const getCommandHandler = (body) => {
 }
 
 exports.handler = async (event = {}) => {
-  console.log(event)
+  console.log("event", event)
   const { body = '' } = event
   console.log(body)
   const bodyParsed = JSON.parse(body)
