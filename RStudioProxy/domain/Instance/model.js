@@ -12,11 +12,10 @@ let instancesChached = []
 let lastCall = new Date(0)
 const minutesCacheToLive = 1
 const millisecondsCacheToLive = minutesCacheToLive * 60 * 1000
-const isCacheExpired = () => (lastCall.getTime() + millisecondsCacheToLive) < new Date().getTime();
+const isCacheExpired = () => lastCall.getTime() + millisecondsCacheToLive < new Date().getTime()
 
 const getInstancesIds = async () => {
-  console.log(lastCall)
-  if(isCacheExpired()){
+  if (isCacheExpired()) {
     const { data } = await commands.sendCommand({ command: commands.instanceCommands.getStatus() })
     const { instances } = data
     lastCall = new Date()
