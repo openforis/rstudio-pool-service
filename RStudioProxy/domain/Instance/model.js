@@ -8,10 +8,21 @@ const getInstance = async ({ instanceId, userId }) => {
   return instance
 }
 
+let instancesChached = []
+let lastCall = new Date(0)
+const minutesCacheToLive = 1
+const millisecondsCacheToLive = minutesCacheToLive * 60 * 1000
+const isCacheExpired = () => lastCall.getTime() + millisecondsCacheToLive < new Date().getTime()
+
 const getInstancesIds = async () => {
-  const { data } = await commands.sendCommand({ command: commands.instanceCommands.getStatus() })
-  const { instances } = data
-  return instances
+  if (isCacheExpired()) {
+    const { data } = await commands.sendCommand({ command: commands.instanceCommands.getStatus() })
+    const { instances } = data
+    lastCall = new Date()
+    instancesChached = [...(instances || [])]
+    return instances
+  }
+  return instancesChached
 }
 
 const killInstance = async ({ instanceId, userId }) =>
