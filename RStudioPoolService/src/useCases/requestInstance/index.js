@@ -1,4 +1,4 @@
-const { MIN_FREE_INSTANCES, MAX_INSTANCES, ARENA_POOL_SERVICE_KEY } = require('../../../config')
+const { MIN_FREE_INSTANCES, MAX_INSTANCES, ARENA_POOL_SERVICE_KEY, ARENA_PROXY_URL } = require('../../../config')
 const { Instance, Authorizer } = require('../../domain')
 
 const { Model: InstanceModel, Manager: InstanceManager } = Instance
@@ -7,7 +7,10 @@ const generateResponse = (instance) => {
   const instanceId = InstanceModel.getId(instance)
   const response = {
     statusCode: 200,
-    body: JSON.stringify({ instanceId }),
+    body: JSON.stringify({
+      instanceId,
+      rStudioProxyUrl: ARENA_PROXY_URL,
+    }),
   }
   return response
 }

@@ -11,5 +11,6 @@ module.exports = {
   INSTANCE_PROFILE: process.env.INSTANCE_PROFILE,
   KEY_NAME: process.env.KEY_NAME,
   ARENA_POOL_SERVICE_KEY: process.env.ARENA_POOL_SERVICE_KEY,
+  ARENA_PROXY_URL: process.env.ARENA_PROXY_URL,
   PROXY_KEY: process.env.PROXY_KEY,
 }
