@@ -10,8 +10,8 @@ const getInstance = async ({ instanceId, userId }) => {
 
 let instancesChached = []
 let lastCall = new Date(0)
-const minutesCacheToLive = 1
-const millisecondsCacheToLive = minutesCacheToLive * 60 * 1000
+const secondsCacheToLive = 30
+const millisecondsCacheToLive = secondsCacheToLive * 1000
 const isCacheExpired = () => lastCall.getTime() + millisecondsCacheToLive < new Date().getTime()
 
 const getInstancesIds = async () => {
