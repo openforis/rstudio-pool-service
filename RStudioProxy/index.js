@@ -25,6 +25,10 @@ app.use((err, req,res,next) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 })
 
+app.use((err, req,res,next) => {  
+  res.sendFile(path.join(__dirname + '/public/index.html'));
+})
+
 // Start the Proxy
 app.listen(PORT, () => {
   console.log(`Starting Proxy at: ${PORT}`)
