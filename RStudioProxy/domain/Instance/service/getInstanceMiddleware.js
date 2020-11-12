@@ -6,7 +6,7 @@ const getInstanceMiddleware = async (req, res, next) => {
   let instanceId = false
   let userId = false
   const originalUrl = req.originalUrl
-  const originalUrlSplitted = originalUrl.split('_')
+  const originalUrlSplitted = (originalUrl || '').split('_')
 
   if (originalUrlSplitted.length === 2 && instancesIds.includes(originalUrlSplitted[0].replace('/', ''))) {
     instanceId = originalUrlSplitted[0].replace('/', '')
