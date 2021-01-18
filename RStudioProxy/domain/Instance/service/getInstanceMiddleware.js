@@ -1,4 +1,4 @@
-const InstanceModel = require('./model')
+const InstanceModel = require('../model')
 
 const getInstanceMiddleware = async (req, res, next) => {
   const instancesIds = await InstanceModel.getInstancesIds()
@@ -21,7 +21,6 @@ const getInstanceMiddleware = async (req, res, next) => {
         referer: refererSplitted[0],
       })
     : false
-
   if (instanceIdOnReferer && refererSplitted.length === 2) {
     instanceId = instanceIdOnReferer
     userId = refererSplitted[1]
@@ -40,6 +39,4 @@ const getInstanceMiddleware = async (req, res, next) => {
   next()
 }
 
-module.exports = {
-  getInstanceMiddleware,
-}
+module.exports = getInstanceMiddleware

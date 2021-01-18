@@ -11,7 +11,13 @@ const app = express()
 
 app.use(morgan('dev'))
 
-app.use('', Instance.Service.getInstanceMiddleware, Timer.Service.timersMiddleware, Proxy.Service.proxyMiddleware)
+app.use(
+  '',
+  Instance.Service.getInstanceMiddleware,
+  Instance.Service.getInstanceBasedOnCookieMiddleware,
+  Timer.Service.timersMiddleware,
+  Proxy.Service.proxyMiddleware
+)
 
 // Start the Proxy
 app.listen(PORT, () => {
