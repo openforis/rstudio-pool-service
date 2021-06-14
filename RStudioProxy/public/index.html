@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Your RStudio Machine is going to be ready in a while</h1>
+<h1 id="countdown"></h1>
+
+</body>
+<script type="text/javascript">
+    
+    var totalTime = 60;
+    const updateClock = () => {
+        const countDown = document.getElementById('countdown')
+        if(totalTime==0){
+            countDown.innerHTML = '<button onclick={location.reload()}>open</button>';
+        }else{
+            countDown.innerHTML = totalTime;
+            totalTime-=1;
+            setTimeout("updateClock()",1000);
+        }
+    }
+    window.onload = updateClock;
+    
+  </script>
+
+</html>

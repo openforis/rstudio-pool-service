@@ -2,12 +2,11 @@ const { DEFAULT_URL, ROUTE_TO_REPLACE, STRING_TO_REPLACE } = require('../../conf
 
 const customRouter = (req) => {
   const { instanceId, instance } = req
-  let route = DEFAULT_URL
   if (instanceId && instance) {
     const instanceUrl = instance.url
-    route = ROUTE_TO_REPLACE.replace(STRING_TO_REPLACE, instanceUrl)
+    return ROUTE_TO_REPLACE.replace(STRING_TO_REPLACE, instanceUrl)
   }
-  return route
+  throw Error('error')
 }
 
 const rewriteFn = (path, req) => {
