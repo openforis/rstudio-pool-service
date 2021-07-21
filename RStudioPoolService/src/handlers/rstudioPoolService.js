@@ -1,7 +1,8 @@
-const { requestInstance, removeInstance, checkStatus } = require('../useCases')
+const { requestInstance, removeInstance, checkStatus, checkInstances } = require('../useCases')
 
 const commandHandlers = {
   REQUEST_RSTUDIO: requestInstance,
+  CHECK_INSTANCES: checkInstances,
   GET_STATUS: checkStatus,
   DELETE: removeInstance,
 }
