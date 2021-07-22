@@ -1,4 +1,5 @@
 const { MIN_FREE_INSTANCES, MAX_INSTANCES, ARENA_POOL_SERVICE_KEY, ARENA_PROXY_URL } = require('../../../config')
+
 const { Instance, Authorizer } = require('../../domain')
 
 const { Model: InstanceModel, Manager: InstanceManager } = Instance
