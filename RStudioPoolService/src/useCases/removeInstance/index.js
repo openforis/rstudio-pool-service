@@ -19,7 +19,7 @@ const removeInstance = async (event, { payload = {} } = {}) => {
     if (InstanceModel.getId(instance) !== instanceId) {
       const response = {
         statusCode: 403,
-        body: JSON.stringify({ instance }),
+        body: JSON.stringify({ instance, instanceId, userId }),
       }
       return response
     }
