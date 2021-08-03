@@ -15,15 +15,12 @@ const removeInstance = async (event, { payload = {} } = {}) => {
   }
 
   if (Authorizer(event, [ARENA_POOL_SERVICE_KEY])) {
-    const instance = await InstanceManager.getInstanceById({ instanceId })
-    console.log(instance)
+    const instance = await InstanceManager.getInstanceByUserId({ userId })
 
-    const _instance = await InstanceManager.getInstanceByUserId({ userId })
-    console.log(_instance)
-    if (InstanceModel.getId(instance) !== instanceId || true) {
+    if (InstanceModel.getId(instance) !== instanceId) {
       const response = {
         statusCode: 403,
-        body: JSON.stringify({ instance, _instance, instanceId, userId }),
+        body: JSON.stringify({}),
       }
       return response
     }
