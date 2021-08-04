@@ -52,6 +52,7 @@ const getNewInstanceConfig = ({ userId = false } = {}) => ({
   IamInstanceProfile: {
     Name: INSTANCE_PROFILE,
   },
+  Placement: { AvailabilityZone: 'eu-central-1c' },
   UserData: `#!/bin/bash
     sudo mkdir /home/ubuntu/docker-runner
     cd /home/ubuntu/docker-runner
