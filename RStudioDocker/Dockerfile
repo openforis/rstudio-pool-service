@@ -1,7 +1,7 @@
 FROM rocker/rstudio:latest
 
 RUN apt-get update
-RUN apt-get remove libpq5 -y
+# RUN apt-get remove libpq5 -y
 RUN apt-get install libpq-dev r-cran-rgl -y
 
 RUN install2.r --error dplyr
@@ -33,12 +33,12 @@ RUN apt-get install -y r-cran-rjava default-jre default-jdk libxml2-dev libuduni
 RUN R CMD javareconf
 
 RUN install2.r --error -r 'http://cran.r-project.org' XLConnect rentrez
-RUN install2.r --error -r 'http://cran.r-project.org' lmfor tidyverse survey stringi survival DT lattice png jpeg vegan sampling sp markdown nortest outliers SamplingBigData scales spatial whisker
+RUN install2.r --error -r 'http://cran.r-project.org' lmfor survey survival DT lattice png jpeg vegan sampling sp markdown nortest outliers SamplingBigData scales spatial whisker
 
 RUN apt-get install -y libglu1-mesa-dev 
 RUN apt-get install -y libiodbc2-dev
 RUN apt-get install -y unixodbc unixodbc-dev r-cran-rodbc libgdal-dev libproj-dev
-RUN apt-get install -y r-cran-hmisc libfontconfig1-dev libcairo2-dev 
+RUN apt-get install -y r-cran-hmisc libfontconfig1-dev libcairo2-dev
 RUN apt-get install -y libgit2-dev r-cran-vegan
 
 RUN install2.r --error -r 'http://cran.r-project.org' sf rgdal
