@@ -45,13 +45,13 @@ This system listens to POST HTTP requests, which should contain a command and a 
   ```jsx
   { "command": "GET_STATUS", "payload": {"instanceId": "i-1234"} }
   return 200 OK
-  	{
-  		"instance": {
-  			"instanceId": "i-1234",
-  			"url": "public-dns-url",
-  			"keyName": "keyName",
-  			...tags // userId, ...
-  		}
+   {
+    "instance": {
+     "instanceId": "i-1234",
+     "url": "public-dns-url",
+     "keyName": "keyName",
+     ...tags // userId, ...
+    }
   }
   ```
 
@@ -104,8 +104,8 @@ The instances are created using the EC2 client of AWS CLI. Into the `./infrastru
     cd /home/ubuntu/docker-runner
     sudo chown -R $USER:$USER /home/ubuntu/docker-runner
     sudo apt-get update
-    curl -fsSL https://get.docker.com -o get-docker.sh
-    sudo sh get-docker.sh
+    sudo apt install docker -y
+    sudo apt install docker.io -y
     sudo service docker start
     sudo chmod 666 /var/run/docker.sock
     sudo apt install awscli -y
@@ -315,11 +315,13 @@ RUN install2.r --error \
 Tag this new image and push it to the registry.
 
 ## Security
+
 To create an instance the requester needs a key.
 
 To get information of some instance the userId and the instanceId are needed.
 
 ---
+
 ## How can the system be improved?
 
 [ ] Add Purpose as config on the proxy and parameter on the Service, based on this Purpose choose one image and ec2 instance config.

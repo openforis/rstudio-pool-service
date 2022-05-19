@@ -58,8 +58,8 @@ const getNewInstanceConfig = ({ userId = false } = {}) => ({
     cd /home/ubuntu/docker-runner
     sudo chown -R $USER:$USER /home/ubuntu/docker-runner
     sudo apt-get update
-    curl -fsSL https://get.docker.com -o get-docker.sh
-    sudo sh get-docker.sh
+    sudo apt install docker -y
+    sudo apt install docker.io -y
     sudo service docker start
     sudo chmod 666 /var/run/docker.sock
     sudo apt install awscli -y
