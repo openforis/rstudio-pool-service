@@ -83,3 +83,5 @@ RUN install2.r --error -r 'http://cran.r-project.org'  \
 
 # RUN install2.r --error -r 'https://mac.R-project.org' mapview
 
+RUN apt-get autoclean -y
+RUN apt-get autoremove -y
