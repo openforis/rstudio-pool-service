@@ -1,48 +1,85 @@
-FROM rocker/rstudio:latest
+FROM rocker/rstudio:4.5.1
 
 RUN apt-get update
 # RUN apt-get remove libpq5 -y
-RUN apt-get install libpq-dev r-cran-rgl -y
+RUN apt-get install -y \
+    default-jre \
+    default-jdk \
+    libpq-dev \
+    libxml2-dev \
+    libudunits2-dev \
+    libgeos-dev \
+    libglu1-mesa-dev \
+    r-cran-rgl \
+    r-cran-rjava
 
-RUN install2.r --error dplyr
+RUN R CMD javareconf
+
+RUN apt-get install -y \
+    libcairo2-dev \
+    libgdal-dev \
+    libfontconfig1-dev \
+    libgit2-dev \
+    libglu1-mesa-dev \
+    libproj-dev \
+    r-cran-hmisc \
+    r-cran-rodbc \
+    r-cran-vegan \
+    unixodbc \
+    unixodbc-dev
+# libiodbc2-dev \
+
 RUN install2.r --error \
-    sqldf \
-    jsonlite \
+    dplyr \
     httr \
+    jsonlite \
+    sqldf \
     zip
     
 RUN install2.r --error -r 'http://cran.r-project.org'  \
     data.table \
     desc \
     dplyr \
-    RPostgreSQL \
-    reshape \
-    reshape2 \
-    random \
-    gsubfn \
+    DT \
     evaluate \
     Formula \
+    ggExtra \
+    gsubfn \
+    Hmisc \
+    jpeg \
     knitr \
+    lattice \
     lazyeval \
     locfit \
-    DataCombine \
+    lmfor \
+    markdown \
+    nortest \
+    outliers \
+    png \
+    random \
+    rentrez \
+    reshape \
+    reshape2 \
+    rlang \
+    rmarkdown \
+    RPostgreSQL \
     RSQLite \
-    rmarkdown
+    sampling \
+    SamplingBigData \
+    scales \
+    sp \
+    spatial \
+    stringr \
+    srvyr \
+    survey \
+    survival \
+    vegan \
+    whisker \
+    XLConnect
+#    BIOMASS \
+#    DataCombine \
+#    rgdal \
+#    sf \
 
-RUN apt-get install -y r-cran-rjava default-jre default-jdk libxml2-dev libudunits2-dev libgeos-dev
-RUN R CMD javareconf
-
-RUN install2.r --error -r 'http://cran.r-project.org' XLConnect rentrez
-RUN install2.r --error -r 'http://cran.r-project.org' lmfor survey survival DT lattice png jpeg vegan sampling sp markdown nortest outliers SamplingBigData scales spatial whisker
-
-RUN apt-get install -y libglu1-mesa-dev 
-RUN apt-get install -y libiodbc2-dev
-RUN apt-get install -y unixodbc unixodbc-dev r-cran-rodbc libgdal-dev libproj-dev
-RUN apt-get install -y r-cran-hmisc libfontconfig1-dev libcairo2-dev
-RUN apt-get install -y libgit2-dev r-cran-vegan
-
-RUN install2.r --error -r 'http://cran.r-project.org' sf rgdal
-RUN install2.r --error -r 'http://cran.r-project.org' Hmisc
-RUN install2.r --error -r 'https://mac.R-project.org' mapview
-RUN install2.r --error -r 'http://cran.r-project.org' ggExtra BIOMASS
+# RUN install2.r --error -r 'https://mac.R-project.org' mapview
 
