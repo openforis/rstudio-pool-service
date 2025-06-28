@@ -57,13 +57,34 @@ const getNewInstanceConfig = ({ userId = false } = {}) => ({
     sudo mkdir /home/ubuntu/docker-runner
     cd /home/ubuntu/docker-runner
     sudo chown -R $USER:$USER /home/ubuntu/docker-runner
+
     sudo apt-get update
-    sudo apt install docker -y
-    sudo apt install docker.io -y
-    sudo service docker start
-    sudo chmod 666 /var/run/docker.sock
+    sudo apt-get install ca-certificates curl
+    sudo install -m 0755 -d /etc/apt/keyrings
+    sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+    sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+    # Add the repository to Apt sources:
+    echo \
+      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+      $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+      sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt-get update
+
+    # add current user to "docker" group (to allow running docker without sudo)
+    sudo usermod -aG docker $USER
+    newgrp docker
+
+    # install Docker
+    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+    # install AWS CLI
     sudo apt install awscli -y
+
+    # login to Amazon ECR
     aws ecr get-login-password --region ${REGION} | docker login --username AWS --password-stdin ${ACCOUNT}
+
+    # pull rstudio image
     docker pull ${ACCOUNT}/rstudio
     sudo docker run -d -p 8787:8787 -e DISABLE_AUTH=true ${ACCOUNT}/rstudio
  `,
