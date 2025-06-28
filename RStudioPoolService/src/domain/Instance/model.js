@@ -71,14 +71,14 @@ const getNewInstanceConfig = ({ userId = false } = {}) => ({
       $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
       sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     sudo apt-get update
+    
+    # install Docker
+    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
     # add current user to "docker" group (to allow running docker without sudo)
     sudo usermod -aG docker $USER
     newgrp docker
-
-    # install Docker
-    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-
+    
     # install AWS CLI
     sudo apt-get install -y unzip
     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
