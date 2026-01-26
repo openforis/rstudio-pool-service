@@ -6,7 +6,9 @@ const getUserId = (instance) => instance.userId || false
 
 const isFree = (instance) => !getUserId(instance)
 
-const setUserId = ({ userId }) => (instance) => ({ ...instance, userId })
+const setUserId =
+  ({ userId }) =>
+  (instance) => ({ ...instance, userId })
 
 const parsedInstanceFrom = ({ instance }) => {
   const { InstanceId, PublicDnsName, KeyName, Tags } = instance
@@ -60,7 +62,7 @@ const getNewInstanceConfig = ({ userId = false } = {}) => ({
 
     # Add Docker's official GPG key:
     sudo apt-get update
-    sudo apt-get install ca-certificates curl
+    sudo apt-get install -y ca-certificates curl
     sudo install -m 0755 -d /etc/apt/keyrings
     sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
     sudo chmod a+r /etc/apt/keyrings/docker.asc
@@ -71,14 +73,14 @@ const getNewInstanceConfig = ({ userId = false } = {}) => ({
       $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
       sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     sudo apt-get update
-    
+
     # install Docker
     sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
     # add current user to "docker" group (to allow running docker without sudo)
     sudo usermod -aG docker $USER
     newgrp docker
-    
+
     # install AWS CLI
     sudo apt-get install -y unzip
     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"

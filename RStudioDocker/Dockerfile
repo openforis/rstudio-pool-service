@@ -30,12 +30,11 @@ RUN apt-get install -y \
 # libiodbc2-dev \
 
 RUN install2.r --error \
-    dplyr \
     httr \
     jsonlite \
     sqldf \
     zip
-    
+
 RUN install2.r --error -r 'http://cran.r-project.org'  \
     data.table \
     desc \
