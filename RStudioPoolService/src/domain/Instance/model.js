@@ -100,11 +100,11 @@ const getNewInstanceConfig = ({ userId = false } = {}) => ({
     rm awscliv2.zip
 
     # login to Amazon ECR
-    aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 407725983764.dkr.ecr.eu-central-1.amazonaws.com
+    aws ecr get-login-password --region ${REGION} | docker login --username AWS --password-stdin ${ACCOUNT}
 
     # pull rstudio image
-    docker pull 407725983764.dkr.ecr.eu-central-1.amazonaws.com/rstudio:1.1
-    sudo docker run -d -p 8787:8787 -e DISABLE_AUTH=true --restart always 407725983764.dkr.ecr.eu-central-1.amazonaws.com/rstudio:1.1
+    docker pull ${ACCOUNT}/rstudio:1.1
+    sudo docker run -d -p 8787:8787 -e DISABLE_AUTH=true --restart always ${ACCOUNT}/rstudio:1.1
  `,
   TagSpecifications: [
     {
