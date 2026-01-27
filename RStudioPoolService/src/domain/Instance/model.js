@@ -104,6 +104,8 @@ const getNewInstanceConfig = ({ userId = false } = {}) => ({
 
     # pull rstudio image
     docker pull ${ACCOUNT}/rstudio:1.1
+
+    # run rstudio container
     sudo docker run -d -p 8787:8787 -e DISABLE_AUTH=true --restart always ${ACCOUNT}/rstudio:1.1
  `,
   TagSpecifications: [
