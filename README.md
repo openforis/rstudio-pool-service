@@ -91,7 +91,7 @@ The instances are created using the EC2 client of AWS CLI. Into the `./infrastru
 ```jsx
 {
   ImageId: 'ami-0130bec6e5047f596', // this iam can be found right to the name of the instance when a new instance is launched by hand, this id is unique by region
-  InstanceType: 't2.micro', // size of the instance
+  InstanceType: 't3.micro', // size of the instance
   KeyName: KEY_NAME,
   MaxCount: 1,
   MinCount: 1,
@@ -99,19 +99,58 @@ The instances are created using the EC2 client of AWS CLI. Into the `./infrastru
   IamInstanceProfile: {
     Name: INSTANCE_PROFILE,
   },
+  BlockDeviceMappings: [
+    {
+      DeviceName: '/dev/sda1',
+      Ebs: {
+        DeleteOnTermination: true,
+        VolumeSize: 16, // size in GB
+        VolumeType: 'gp3',
+      },
+    },
+  ],
   UserData: `#!/bin/bash
     sudo mkdir /home/ubuntu/docker-runner
     cd /home/ubuntu/docker-runner
     sudo chown -R $USER:$USER /home/ubuntu/docker-runner
+
+    # Add Docker's official GPG key:
     sudo apt-get update
-    sudo apt install docker -y
-    sudo apt install docker.io -y
-    sudo service docker start
-    sudo chmod 666 /var/run/docker.sock
-    sudo apt install awscli -y
+    sudo apt-get install -y ca-certificates curl
+    sudo install -m 0755 -d /etc/apt/keyrings
+    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+    sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+    # Add the repository to Apt sources:
+    echo \
+      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+      $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+      sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt-get update
+
+    # install Docker
+    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+    # add current user to "docker" group (to allow running docker without sudo)
+    sudo usermod -aG docker $USER
+    newgrp docker
+
+    # install AWS CLI
+    sudo apt-get install -y unzip
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    unzip awscliv2.zip
+    sudo ./aws/install
+    rm -r aws
+    rm awscliv2.zip
+
+    # login to Amazon ECR
     aws ecr get-login-password --region ${REGION} | docker login --username AWS --password-stdin ${ACCOUNT}
-    docker pull ${ACCOUNT}/rstudio
-    sudo docker run -d -p 8787:8787 -e DISABLE_AUTH=true ${ACCOUNT}/rstudio
+
+    # pull rstudio image
+    docker pull ${ACCOUNT}/rstudio:1.1
+
+    # run rstudio container
+    sudo docker run -d -p 8787:8787 -e DISABLE_AUTH=true --restart always ${ACCOUNT}/rstudio:1.1
  `,
   TagSpecifications: [
     {
@@ -235,7 +274,7 @@ Procfile
     STRING_TO_REPLACE: process.env.STRING_TO_REPLACE,
     ROUTE_TO_REPLACE: process.env.ROUTE_TO_REPLACE,
     TIMEOUT_INSTANCE: process.env.TIMEOUT_INSTANCE,
-    PROXY_KEY: process.env.PROXY_KEY
+    PROXY_KEY: process.env.PROXY_KEY,
   }
   ```
 
@@ -274,7 +313,7 @@ module.exports = {
   ROUTE_TO_REPLACE: process.env.ROUTE_TO_REPLACE,
   STRING_TO_REPLACE: process.env.STRING_TO_REPLACE,
   TIMEOUT_INSTANCE: process.env.TIMEOUT_INSTANCE,
-  PROXY_KEY: process.env.PROXY_KEY
+  PROXY_KEY: process.env.PROXY_KEY,
 }
 ```
 
